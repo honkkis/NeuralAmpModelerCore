@@ -187,7 +187,8 @@ inline float mul_rounded(float a, float b)
 /// models warm up over the same number of samples as the code they replace.
 int planar_prewarm_samples()
 {
-  int prewarm = 1;
+  // Match the A2 fast path in the 1f42f885 Core revision used by TONE3000.
+  int prewarm = 0;
   for (int li = 0; li < kNumLayers; li++)
     prewarm += (kKernelSizes[li] - 1) * kDilations[li];
   prewarm += kHeadKernelSize - 1;
